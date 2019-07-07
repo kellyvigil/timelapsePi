@@ -86,14 +86,28 @@ with picamera.PiCamera(resolution='1280x720', framerate=30) as camera:
     output = StreamingOutput()
     sleep(2)
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    camera.iso=60
-    camera.shutter_speed = 100
-    camera.exposure_mode = 'off'
-    camera.awb_mode = 'off'
-    camera.awb_gains = (1,1)
-    camera.meter_mode  = 'backlit'
+    #camera.iso=60
+    #camera.shutter_speed = 100
+    #camera.exposure_mode = 'off'
+    #camera.awb_mode = 'off'
+    #camera.awb_gains = (1,1)
+    #camera.meter_mode  = 'backlit'
+
+    #make a dictionary with all the current settings for reference
+    currentSettings = {
+    'iso':camera.iso,
+    'shutter_speed':camera.shutter_speed,
+    'exposure_mode':camera.exposure_mode,
+    'awb_mode':camera.awb_mode,
+    'awb_gains':camera.awb_gains,
+    'meter_mode':camera.meter_mode,
+    'analog_gain': camera.analog_gain,
+    'digital_gain':camera.digital_gain
+    }
 
     #camera.rotation = 90
+    settingsString = str(currentSettings)
+    camera.annotate_text = settingsString
     camera.start_recording(output, format='mjpeg')
     try:
         address = ('', 8000)
