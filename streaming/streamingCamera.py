@@ -8,6 +8,7 @@ import logging
 import socketserver
 from threading import Condition
 from http import server
+from time import sleep
 
 PAGE="""\
 <html>
@@ -81,11 +82,17 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
-with picamera.PiCamera(resolution='1280x720', framerate=24) as camera:
+with picamera.PiCamera(resolution='1280x720', framerate=30) as camera:
     output = StreamingOutput()
+    sleep(2)
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
     camera.iso=60
-    
+    camera.shutter_speed = 100
+    camera.exposure_mode = 'off'
+    camera.awb_mode = 'off'
+    camera.awb_gains = (1,1)
+    camera.meter_mode  = 'backlit'
+
     #camera.rotation = 90
     camera.start_recording(output, format='mjpeg')
     try:
