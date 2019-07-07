@@ -107,6 +107,7 @@ with picamera.PiCamera(resolution='1280x720', framerate=30) as camera:
 
     #camera.rotation = 90
     settingsString = str(currentSettings)
+    print settingsString
     camera.annotate_text = settingsString
     camera.start_recording(output, format='mjpeg')
     try:
