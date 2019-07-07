@@ -1,0 +1,3 @@
+[submodule "pi-timelapse"]
+	path = pi-timelapse
+	url = https://github.com/geerlingguy/pi-timelapse.git
